@@ -1,0 +1,152 @@
+/*
+  Palette: Obsidian's own graphite surfaces + one purple accent, so the dashboard and the
+  notes workspace feel like one app. Subject colours are muted and share the same
+  lightness/chroma (OKLCH), so no subject shouts louder than another.
+*/
+:root {
+  /* surfaces (light) */
+  --paper: #f4f4f5;
+  --panel: #ffffff;
+  --panel-2: #f6f6f8;
+  --panel-3: #eeeef1;
+  --line: #dcdce1;
+  --line-2: #e9e9ed;
+  --rail: #ececf0;
+  --rail-ink: #1f1f23;
+  --rail-dim: #6c6c76;
+
+  /* text */
+  --ink: #1f1f23;
+  --ink-2: #55555e;
+  --ink-3: #6b6b75;
+
+  /* accents */
+  --accent: #6c5ce0;
+  --accent-hover: #5a49d2;
+  --accent-ink: #ffffff;
+  --accent-soft: color-mix(in oklab, var(--accent) 12%, var(--panel));
+  --warn: #b86a14;
+  --danger: #c4413a;
+  --ok: #1f8a63;
+  --focus: #6c5ce0;
+  --now: var(--ink);
+
+  /* subjects */
+  --c-MAT: oklch(0.6 0.16 25);
+  --c-UVR: oklch(0.57 0.14 255);
+  --c-PRO1: oklch(0.58 0.12 165);
+  --c-SPO: oklch(0.64 0.13 80);
+  --c-UVS: oklch(0.56 0.16 310);
+
+  --font-ui: "Hanken Grotesk", system-ui, sans-serif;
+  --font-num: "Barlow Condensed", "Arial Narrow", sans-serif;
+  /* one restrained radius scale: controls 4, blocks 6 */
+  --r-sm: 4px;
+  --r: 5px;
+  --r-lg: 6px;
+  --shadow: 0 8px 28px rgb(0 0 0 / 0.14);
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1e1e1e;
+    --panel: #262626;
+    --panel-2: #2c2c2c;
+    --panel-3: #333333;
+    --line: #3b3b3b;
+    --line-2: #303030;
+    --rail: #181818;
+    --rail-ink: #dcdcdc;
+    --rail-dim: #8a8a8a;
+
+    --ink: #dcdcdc;
+    --ink-2: #a8a8a8;
+    --ink-3: #9a9a9a;
+
+    --accent: #7b6cd9;
+    --accent-hover: #8c7fe6;
+    --warn: #e0a458;
+    --danger: #e5675f;
+    --ok: #5fc9a0;
+    --focus: #9a8df0;
+
+    --c-MAT: oklch(0.74 0.12 25);
+    --c-UVR: oklch(0.75 0.1 250);
+    --c-PRO1: oklch(0.77 0.11 165);
+    --c-SPO: oklch(0.82 0.11 90);
+    --c-UVS: oklch(0.74 0.12 310);
+
+    --shadow: 0 10px 34px rgb(0 0 0 / 0.5);
+  }
+}
+
+* { box-sizing: border-box; }
+html, body, #app { height: 100%; margin: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 15px/1.5 var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+h1, h2, h3, p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+::selection { background: color-mix(in oklab, var(--accent) 38%, transparent); }
+
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--r-sm); }
+
+/* Thin scrollbars that match the surfaces */
+* { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 8px 15px; border-radius: var(--r-sm);
+  border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink);
+  font-weight: 600; line-height: 1.2; white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, transform 0.08s;
+}
+.btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.45; cursor: default; transform: none; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn.ghost:hover:not(:disabled) { background: var(--panel-3); border-color: var(--ink-3); }
+.btn.small { padding: 4px 10px; font-size: 13px; }
+.btn.danger { background: var(--danger); border-color: var(--danger); color: #fff; }
+
+/* Inputs */
+.field { display: grid; gap: 6px; }
+.field > span { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+input[type="text"], input[type="date"], input[type="time"], input[type="url"], input[type="search"], select, textarea {
+  width: 100%; padding: 8px 11px;
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-sm);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+input:hover, select:hover, textarea:hover { border-color: var(--ink-3); }
+input:focus, select:focus, textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 25%, transparent); }
+textarea { resize: vertical; line-height: 1.55; }
+::placeholder { color: var(--ink-3); }
+
+/* Shared bits */
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c, var(--ink-3)); flex: none; display: inline-block; }
+.muted { color: var(--ink-3); }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r-lg); }
+/* Page sections are plain: a heading with a rule under it, no box. */
+.section { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.section > header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 7px; border-bottom: 1px solid var(--line); }
+.section-title { font: 600 20px/1.1 var(--font-num); letter-spacing: 0; }
+.link { border: 0; background: transparent; padding: 0; color: var(--accent); font-size: 13.5px; font-weight: 600; }
+.link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.empty-line { color: var(--ink-3); padding: 2px 0 4px; }
+.banner {
+  padding: 10px 14px; border-radius: var(--r); font-size: 14px;
+  background: color-mix(in oklab, var(--warn) 14%, var(--panel)); border: 1px solid color-mix(in oklab, var(--warn) 45%, var(--line));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

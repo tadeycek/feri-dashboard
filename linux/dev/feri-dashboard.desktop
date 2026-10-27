@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=FERI Dashboard
+Comment=Urnik, roki in zapiski za FERI
+Exec=/home/tadej/Documents/FERI/dashboard/linux/run.sh
+Icon=/home/tadej/Documents/FERI/dashboard/linux/src-tauri/icons/128x128.png
+Terminal=false
+Categories=Education;
