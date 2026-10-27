@@ -1,0 +1,32 @@
+filters:
+  and:
+    - file.inFolder("Roki")
+    - 'file.ext == "md"'
+views:
+  - type: table
+    name: Prihajajoči
+    filters:
+      and:
+        - 'datum >= today()'
+        - 'opravljeno != true'
+    order:
+      - datum
+      - file.name
+      - predmet
+      - vrsta
+      - opravljeno
+    sort:
+      - property: datum
+        direction: ASC
+  - type: table
+    name: Vsi roki
+    order:
+      - datum
+      - file.name
+      - predmet
+      - vrsta
+      - opravljeno
+      - ocena
+    sort:
+      - property: datum
+        direction: ASC

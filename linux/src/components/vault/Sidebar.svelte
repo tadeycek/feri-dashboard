@@ -3,6 +3,7 @@
   import { app } from "../../lib/store.svelte.js";
   import FileExplorer from "./FileExplorer.svelte";
   import SearchPanel from "./SearchPanel.svelte";
+  import VaultSetup from "../VaultSetup.svelte";
 
   const tabs = [
     { id: "files", label: "Files", d: "M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" },
@@ -23,7 +24,8 @@
   {#if vault.error}
     <div class="err">
       <p>{vault.error}</p>
-      <button class="btn small" onclick={() => (app.settingsDialog = true)}>Open settings</button>
+      <VaultSetup />
+      <button class="btn small ghost" onclick={() => (app.settingsDialog = true)}>Open settings</button>
     </div>
   {:else if vault.leftTab === "files"}
     <FileExplorer />

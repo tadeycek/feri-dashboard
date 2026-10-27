@@ -1,12 +1,14 @@
 mod background;
 mod ics;
 mod model;
+mod starter;
 mod store;
 mod vault;
 
 use model::{Change, Event, NewNote, NewRok, NoteInfo, Rok, Settings, SubjectInfo, SUBJECTS};
 use vault::{Entry, NoteContent, SearchHit};
 use serde::Serialize;
+use std::path::Path;
 use std::time::Duration;
 use tauri::{AppHandle, Manager};
 
@@ -149,6 +151,16 @@ fn open_uri(uri: &str) -> std::io::Result<()> {
     cmd.arg(uri).spawn().map(|_| ())
 }
 
+/// Fills a folder with the empty starter vault. Existing files are kept. Returns the number of files written.
+#[tauri::command]
+fn create_starter_vault(path: String) -> Result<usize, String> {
+    let path = path.trim();
+    if path.is_empty() {
+        return Err("Choose a folder first.".into());
+    }
+    starter::create(Path::new(path))
+}
+
 #[tauri::command]
 fn open_in_obsidian(app: AppHandle, path: String) -> Result<(), String> {
     let root = vault::root(&store::load_settings(&app).vault_path)?;
@@ -224,7 +236,7 @@ pub fn run() {
         return;
     }
 
-    let builder = tauri::Builder::default();
+    let builder = tauri::Builder::default().plugin(tauri_plugin_dialog::init());
     // A second launch (menu, autostart) brings the running window forward instead of starting another copy.
     #[cfg(desktop)]
     let builder = builder.plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| background::show_main(app)));
@@ -254,6 +266,7 @@ pub fn run() {
             save_note,
             recent_notes,
             open_in_obsidian,
+            create_starter_vault,
             vault_tree,
             read_note,
             write_note,

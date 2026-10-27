@@ -8,7 +8,7 @@ const collator = new Intl.Collator("sl", { numeric: true, sensitivity: "base" })
 const SAVE_DELAY = 700;
 
 export const isMd = (p) => /\.md$/i.test(p);
-export const stemOf = (p) => p.split("/").pop().replace(/\.md$/i, "");
+export const stemOf = (p) => p.split(/[\\/]/).pop().replace(/\.md$/i, "");
 export const nameOf = (p) => p.split("/").pop();
 export const dirOf = (p) => (p.includes("/") ? p.slice(0, p.lastIndexOf("/")) : "");
 const labelOf = (e) => (e.is_dir || !isMd(e.path) ? nameOf(e.path) : stemOf(e.path));

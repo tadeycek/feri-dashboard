@@ -13,4 +13,4 @@ Built by GitHub Actions (`.github/workflows/windows.yml`). Download from the lat
 - `FERI Dashboard_x.y.z_x64-setup.exe`: installer
 - `feri-dashboard.exe`: portable
 
-Obsidian is not required. Set the notes folder in Settings (default `%USERPROFILE%\Documents\FERI\Zapiski\Sola`). The `.exe` is unsigned, so SmartScreen warns on first run.
+Obsidian is not required. On first run use Settings → Choose folder… and Create starter vault to get the empty folder layout (subjects, templates, index notes). Default notes folder: `%USERPROFILE%\Documents\FERI\Zapiski\Sola`. The `.exe` is unsigned, so SmartScreen warns on first run.

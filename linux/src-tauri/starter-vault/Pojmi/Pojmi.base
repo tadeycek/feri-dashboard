@@ -1,0 +1,14 @@
+filters:
+  and:
+    - file.inFolder("Pojmi")
+    - 'tip == "pojem"'
+views:
+  - type: table
+    name: Vsi pojmi
+    order:
+      - file.name
+      - predmet
+      - file.backlinks
+    sort:
+      - property: file.name
+        direction: ASC

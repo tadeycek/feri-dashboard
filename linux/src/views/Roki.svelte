@@ -1,5 +1,6 @@
 <script>
   import { app } from "../lib/store.svelte.js";
+  import VaultSetup from "../components/VaultSetup.svelte";
   import { count, dayKey, daysUntil, dueLabel, numericDate } from "../lib/time.js";
   import { colorOf, rokTypeLabel } from "../lib/subjects.js";
 
@@ -19,7 +20,7 @@
     <button class="btn" onclick={() => (app.rokDialog = true)}>Add deadline</button>
   </header>
 
-  {#if app.vaultError}<p class="banner">{app.vaultError}</p>{/if}
+  {#if app.vaultError}<p class="banner">{app.vaultError}</p><div class="banner-setup"><VaultSetup /></div>{/if}
 
   {#snippet row(r)}
     {@const n = daysUntil(r.datum, app.now)}

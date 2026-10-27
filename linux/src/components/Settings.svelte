@@ -2,6 +2,7 @@
   import { app } from "../lib/store.svelte.js";
   import * as api from "../lib/api.js";
   import Dialog from "./Dialog.svelte";
+  import VaultSetup from "./VaultSetup.svelte";
 
   let vault = $state("");
   let url = $state("");
@@ -61,7 +62,8 @@
     <label class="field">
       <span>Obsidian vault folder</span>
       <input type="text" bind:value={vault} required spellcheck="false" />
-      <small class="muted">Notes and deadlines are read from and saved to this folder.</small>
+      <small class="muted">Notes and deadlines are read from and saved to this folder. Obsidian is not needed.</small>
+      <VaultSetup path={vault} onpick={(p) => (vault = p)} />
     </label>
     <label class="field">
       <span>Timetable link (iCal)</span>

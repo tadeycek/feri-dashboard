@@ -114,6 +114,7 @@ let autostart = false;
 export async function call(cmd, args = {}) {
   if (vaultCall[cmd]) return vaultCall[cmd](args);
   switch (cmd) {
+    case "create_starter_vault": return 16;
     case "get_autostart": return autostart;
     case "set_autostart": autostart = !!args.enabled; return null;
     case "get_subjects": return SUBJECTS;

@@ -1,0 +1,74 @@
+filters:
+  and:
+    - 'file.ext == "md"'
+views:
+  - type: table
+    name: Matematika 1
+    filters:
+      and:
+        - file.inFolder("Predmeti/Matematika 1")
+        - 'tip != "predmet"'
+    order:
+      - file.name
+      - tip
+      - datum
+      - file.mtime
+    sort:
+      - property: datum
+        direction: DESC
+  - type: table
+    name: Uvod v računalništvo
+    filters:
+      and:
+        - file.inFolder("Predmeti/Uvod v računalništvo")
+        - 'tip != "predmet"'
+    order:
+      - file.name
+      - tip
+      - datum
+      - file.mtime
+    sort:
+      - property: datum
+        direction: DESC
+  - type: table
+    name: Programiranje 1
+    filters:
+      and:
+        - file.inFolder("Predmeti/Programiranje 1")
+        - 'tip != "predmet"'
+    order:
+      - file.name
+      - tip
+      - datum
+      - file.mtime
+    sort:
+      - property: datum
+        direction: DESC
+  - type: table
+    name: Sodobna programska orodja
+    filters:
+      and:
+        - file.inFolder("Predmeti/Sodobna programska orodja")
+        - 'tip != "predmet"'
+    order:
+      - file.name
+      - tip
+      - datum
+      - file.mtime
+    sort:
+      - property: datum
+        direction: DESC
+  - type: table
+    name: Uvod v svetovni splet
+    filters:
+      and:
+        - file.inFolder("Predmeti/Uvod v svetovni splet")
+        - 'tip != "predmet"'
+    order:
+      - file.name
+      - tip
+      - datum
+      - file.mtime
+    sort:
+      - property: datum
+        direction: DESC

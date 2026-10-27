@@ -22,6 +22,13 @@ export const createRok = (rok) => call("create_rok", { rok });
 export const toggleRok = (file) => call("toggle_rok", { file });
 export const saveNote = (note) => call("save_note", { note });
 export const recentNotes = () => call("recent_notes");
+export const createStarterVault = (path) => call("create_starter_vault", { path });
+/** Native folder picker. Resolves to the chosen path, or null if cancelled (or in the browser demo). */
+export async function pickFolder(current) {
+  if (!inTauri) return null;
+  const { open } = await import("@tauri-apps/plugin-dialog");
+  return open({ directory: true, multiple: false, defaultPath: current || undefined, title: "Choose your notes folder" });
+}
 export const openInObsidian = (path) => call("open_in_obsidian", { path });
 
 // Background behaviour

@@ -2,6 +2,7 @@
   import { tick } from "svelte";
   import { vault, isMd, nameOf } from "../../lib/vault.svelte.js";
   import { app } from "../../lib/store.svelte.js";
+  import VaultSetup from "../VaultSetup.svelte";
 
   let renameValue = $state("");
   let renameEl = $state();
@@ -83,7 +84,8 @@
     </div>
   {/each}
   {#if vault.loaded && !vault.rows.length && !vault.error}
-    <p class="empty muted">The vault is empty. Create your first note.</p>
+    <p class="empty muted">The vault is empty. Create your first note, or add the starter layout.</p>
+    <div class="empty-setup"><VaultSetup /></div>
   {/if}
 </div>
 
@@ -107,4 +109,5 @@
   .ext { font-size: 13px; padding: 0 5px; border-radius: 4px; border: 1px solid var(--line); color: var(--ink-3); text-transform: lowercase; }
   .rename { margin: 2px 6px 2px calc(22px + var(--d) * 16px); width: calc(100% - 28px - var(--d) * 16px); padding: 2px 6px; font-size: 14px; border-radius: 4px; }
   .empty { padding: 12px 10px; font-size: 13.5px; }
+  .empty-setup { padding: 0 10px; }
 </style>

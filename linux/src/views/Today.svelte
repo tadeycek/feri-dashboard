@@ -4,6 +4,7 @@
   import { vault, stemOf, isMd } from "../lib/vault.svelte.js";
   import TimeGrid from "../components/TimeGrid.svelte";
   import EventDetail from "../components/EventDetail.svelte";
+  import VaultSetup from "../components/VaultSetup.svelte";
   import { addDays, ago, count, dayKey, daysUntil, dueLabel, hm, longDate, minutesOfDay, numericDate, startOfDay, startOfWeek, weekdayShort } from "../lib/time.js";
   import { colorOf, kindLong, kindShort, rokTypeLabel } from "../lib/subjects.js";
 
@@ -99,7 +100,7 @@
   {#if app.error && app.offline}
     <p class="banner">Couldn't refresh the timetable, showing the last saved one. <span class="muted">{app.error}</span></p>
   {/if}
-  {#if app.vaultError}<p class="banner">{app.vaultError}</p>{/if}
+  {#if app.vaultError}<p class="banner">{app.vaultError}</p><div class="banner-setup"><VaultSetup /></div>{/if}
 
   <div class="grid">
     <!-- Column 1: today's timetable -->
